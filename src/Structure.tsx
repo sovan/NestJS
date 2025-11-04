@@ -8,10 +8,11 @@ const Structure = () => {
     let page = params.pageName ? params.pageName : "pages";
     page += params.operation ? "-" + params.operation : "";
     try {
-      const res = require(`./data/${page}.json`);
+      console.log(`sovan ./backend/src/data/${page}.json`);
+      const res = require(`./backend/src/data/${page}.json`);
       return res;
     } catch {
-      const res = require(`./data/page-not-found.json`);
+      const res = require(`./backend/src/data/page-not-found.json`);
       return res;
     }
   };
