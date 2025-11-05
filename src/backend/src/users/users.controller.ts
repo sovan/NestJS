@@ -10,6 +10,7 @@ import {
 import { UsersService } from './users.servies';
 import { CreateUserDto } from './CreateUser.dto';
 import mongoose from 'mongoose';
+import { UpdateUserDto } from './UpdateUser.dto';
 
 @Controller('users')
 export class UsersController {
@@ -35,5 +36,9 @@ export class UsersController {
   }
 
   @Patch(':id')
-  updateUser() {}
+  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    const isValid = mongoose.Types.ObjectId.isValid(id);
+    if (!isValid) throw new HttpException('User not found', 404);
+    return this.userService.updateUser(id, updateUserDto);
+  }
 }
